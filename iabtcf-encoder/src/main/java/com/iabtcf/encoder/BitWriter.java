@@ -24,10 +24,10 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.Base64;
 import java.util.BitSet;
 import java.util.PrimitiveIterator.OfLong;
 
+import com.iabtcf.encoder.base64.Base64EncoderProvider;
 import com.iabtcf.encoder.exceptions.ValueOverflowException;
 import com.iabtcf.utils.FieldDefs;
 import com.iabtcf.utils.IntIterable;
@@ -128,7 +128,7 @@ class BitWriter {
         BitWriter bw = new BitWriter(length);
         BitSet bs = new BitSet();
         for (IntIterator i = of.intIterator(); i.hasNext();) {
-            int nextInt = i.nextInt();
+            int nextInt = i.next();
             if (nextInt <= 0) {
                 throw new IndexOutOfBoundsException("invalid index: " + nextInt);
             }
@@ -196,7 +196,7 @@ class BitWriter {
      */
     public void write(BitWriter bw) {
         for (OfLong i = bw.buffer.longIterator(); i.hasNext();) {
-            write(i.nextLong(), Long.SIZE);
+            write(i.next(), Long.SIZE);
         }
         write(bw.pending >>> bw.bitsRemaining, Long.SIZE - bw.bitsRemaining);
 
@@ -221,7 +221,7 @@ class BitWriter {
         ByteBuffer bb = ByteBuffer.allocate(buffer.size() * (Long.SIZE / Byte.SIZE) + bytesToWrite);
 
         for (OfLong li = buffer.longIterator(); li.hasNext();) {
-            bb.putLong(li.nextLong());
+            bb.putLong(li.next());
         }
 
         for (int i = 0; i < bytesToWrite; i++) {
@@ -252,6 +252,6 @@ class BitWriter {
      * Returns a base64 url encoded representation of the bit array.
      */
     public String toBase64() {
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(this.toByteArray());
+        return Base64EncoderProvider.encoder.encode(this.toByteArray());
     }
 }
