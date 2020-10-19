@@ -20,9 +20,9 @@ package com.iabtcf.decoder;
  * #L%
  */
 
-import java.util.Base64;
 import java.util.EnumSet;
 
+import com.iabtcf.decoder.base64.Base64DecoderProvider;
 import com.iabtcf.exceptions.ByteParseException;
 import com.iabtcf.exceptions.UnsupportedVersionException;
 import com.iabtcf.utils.BitReader;
@@ -34,7 +34,7 @@ class TCStringDecoder {
         // InputStream is = DECODER.wrap(sis);
         //
         //
-        byte[] bytes = Base64.getUrlDecoder().decode(base64UrlEncodedString);
+        byte[] bytes = Base64DecoderProvider.decoder.decode(base64UrlEncodedString);
         return new BitReader(bytes);
     }
 
