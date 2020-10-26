@@ -128,7 +128,7 @@ class BitWriter {
         BitWriter bw = new BitWriter(length);
         BitSet bs = new BitSet();
         for (IntIterator i = of.intIterator(); i.hasNext();) {
-            int nextInt = i.next();
+            int nextInt = i.nextInt();
             if (nextInt <= 0) {
                 throw new IndexOutOfBoundsException("invalid index: " + nextInt);
             }
@@ -196,7 +196,7 @@ class BitWriter {
      */
     public void write(BitWriter bw) {
         for (OfLong i = bw.buffer.longIterator(); i.hasNext();) {
-            write(i.next(), Long.SIZE);
+            write(i.nextLong(), Long.SIZE);
         }
         write(bw.pending >>> bw.bitsRemaining, Long.SIZE - bw.bitsRemaining);
 
@@ -221,7 +221,7 @@ class BitWriter {
         ByteBuffer bb = ByteBuffer.allocate(buffer.size() * (Long.SIZE / Byte.SIZE) + bytesToWrite);
 
         for (OfLong li = buffer.longIterator(); li.hasNext();) {
-            bb.putLong(li.next());
+            bb.putLong(li.nextLong());
         }
 
         for (int i = 0; i < bytesToWrite; i++) {
