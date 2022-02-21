@@ -30,7 +30,7 @@ The latest version of the library support decoding both [v1](https://github.com/
 Example of decoding a consent string,
 
 ```
-import com.iabtcf.decoder.TCString;
+import TCString;
 
 TCString tcString = TCString.decode("COwxsONOwxsONKpAAAENAdCAAMAAAAAAAAAAAAAAAAAA");
 
@@ -64,7 +64,7 @@ try-catch block. See javadoc for further details.
 The iabtcf-decoder library supports decoding iabtcf v1 [publisher purposes consent strings](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Consent%20string%20and%20vendor%20list%20formats%20v1.1%20Final.md#publisher-purposes-consent-string-format-).
 
 ```
-import com.iabtcf.decoder.PPCString;
+import PPCString;
 
 PPCString ppcString = PPCString.decode("BOxgOqAOxgOqAAAABBENC2-AAAAtHAA");
 
@@ -100,8 +100,8 @@ The latest version of the library supports encoding both v1 and v2 strings using
 Example of encoding a consent string,
 
 ```
-import com.iabtcf.encoder.TCStringEncoder.Builder;
-import com.iabtcf.utils.BitSetIntIterable;
+import TCStringEncoder.Builder;
+import BitSetIntIterable;
 
 TCStringEncoder.Builder tcStrBuilder = TCStringEncoder.newBuilder()
     .version(2)
@@ -156,8 +156,8 @@ List respectively. The `iabtcf-extras-jackson` library uses Jackson 2.10.3 to pa
 Example of parsing the GVL,
 
 ```
-import com.iabtcf.extras.jackson.Loader;
-import com.iabtcf.extras.gvl.Gvl;
+import Loader;
+import Gvl;
 
 String gvlContent = "...";
 Loader loader = new Loader();
@@ -167,8 +167,8 @@ Gvl gvl = loader.globalVendorList(gvlContent);
 Example of parsing the CMP List,
 
 ```
-import com.iabtcf.extras.jackson.Loader;
-import com.iabtcf.extras.cmp.CmpList;
+import Loader;
+import CmpList;
 
 String cmpListContent = "...";
 Loader loader = new Loader();
